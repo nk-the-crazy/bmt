@@ -1,0 +1,84 @@
+server:
+  port: ${API_GATEWAY_PORT:8080}
+#-----------------------------------------
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILE}
+  application:
+    name: ${API_GATEWAY_NAME:api-gateway}
+  config:
+    import: optional:file:.env[.properties]
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: ${IDENTITY_SERVICE_NAME}_AUTH
+          uri: lb://${IDENTITY_SERVICE_NAME}
+          predicates:
+            - Path=/api/identity/login/**
+          filters:
+            - name: JwtAuthenticationFilter
+        - id: ${IDENTITY_SERVICE_NAME}_SECURE
+          uri: lb://${IDENTITY_SERVICE_NAME}
+          predicates:
+            - Path=/api/identity/**
+          filters:
+            - name: JwtAuthenticationFilter
+        - id: ${CREDIT_SERVICE_NAME}
+          uri: lb://${CREDIT_SERVICE_NAME}
+          predicates:
+            - Path=/api/credit/**
+#          filters:
+#            - name: JwtAuthenticationFilter
+        - id: ${CUSTOMER_SERVICE_NAME}
+          uri: lb://${CUSTOMER_SERVICE_NAME}
+          predicates:
+            - Path=/api/customer/**
+#          filters:
+#            - name: JwtAuthenticationFilter
+
+#-----------------------------------------
+
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+
+#-----------------------------------------
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
+  instance:
+    hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
+    prefer-ip-address: false
+
+#-----------------------------------------
+management:
+  endpoint:
+    health:
+      showDetails: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - info
+#-----------------------------------------
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cache: trace
+    io:
+      gnt:
+        bmt: info
+#-----------------------------------------

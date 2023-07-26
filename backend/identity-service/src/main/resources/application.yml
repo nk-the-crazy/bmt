@@ -1,0 +1,87 @@
+server:
+  port: ${IDENTITY_SERVICE_PORT:8180}
+  forward-headers-strategy: framework
+
+#-----------------------------------------
+spring:
+  profiles:
+    active: ${SPRING_PROFILE}
+  application:
+    name: ${IDENTITY_SERVICE_NAME:identity-service}
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bmt}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: false
+        format_sql: true
+      # hibernate.jdbc.lob.non_contextual_creation: false
+
+# ----------------------------------------
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+
+#-----------------------------------------
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:admin}
+    password: ${RABBITMQ_PASSWORD:admin}
+
+#-----------------------------------------
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
+  instance:
+    hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
+    prefer-ip-address: false
+
+
+#-----------------------------------------
+management:
+  endpoint:
+    health:
+      showDetails: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - info
+#-----------------------------------------
+
+springdoc:
+  api-docs:
+    path: /api-docs-raw
+  swagger-ui:
+    Path: "/api-docs"
+    use-root-path: false
+  show-actuator: false
+
+#-----------------------------------------
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cache: trace
+    io:
+      gnt:
+        bmt: info
+
+#-----------------------------------------

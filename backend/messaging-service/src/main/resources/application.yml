@@ -1,0 +1,68 @@
+server:
+  port: ${MESSAGING_SERVICE_PORT:8181}
+  forward-headers-strategy: framework
+
+#-----------------------------------------
+spring:
+  profiles:
+    active: ${SPRING_PROFILE}
+  application:
+    name: ${MESSAGING_SERVICE_NAME:messaging-service}
+  config:
+    import: optional:file:.env[.properties]
+
+  mail:
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+#-----------------------------------------
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:admin}
+    password: ${RABBITMQ_PASSWORD:admin}
+
+#-----------------------------------------
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
+  instance:
+    hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
+    prefer-ip-address: false
+
+#-----------------------------------------
+
+management:
+  endpoint:
+    health:
+      showDetails: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - info
+#-----------------------------------------
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cache: trace
+    io:
+      gnt:
+        bmt: info
+
+#-----------------------------------------

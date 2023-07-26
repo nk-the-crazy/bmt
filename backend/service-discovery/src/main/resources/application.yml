@@ -1,0 +1,56 @@
+server:
+  port: ${SERVICE_DISCOVERY_PORT:9000}
+
+#-----------------------------------------
+spring:
+  profiles:
+    active: ${SPRING_PROFILE}
+  application:
+    name: ${SERVICE_DISCOVERY_NAME:service-discovery}
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  config:
+    import: optional:file:.env[.properties]
+  thymeleaf:
+    enabled: false     # Disable Thymeleaf 
+  datasource:
+    type: org.springframework.jdbc.datasource.SimpleDriverDataSource
+
+#-----------------------------------------
+
+eureka:
+  instance:
+    hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
+  client:  # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
+
+#-----------------------------------------
+
+management:
+  endpoint:
+    health:
+      showDetails: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - info
+
+#-----------------------------------------
+
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cache: trace
+    io:
+      gnt:
+        finms: info
+#-----------------------------------------

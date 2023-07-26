@@ -1,0 +1,8 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  cloud:
+    config:
+      # uri: http://${CONG_SERVER_HOSTNAME}:${CONG_SERVER_PORT}
+      discovery:
+        serviceI: ${CONFIG_SERVER_NAME}

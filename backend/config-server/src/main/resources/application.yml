@@ -1,0 +1,56 @@
+server:
+  port: ${CONFIG_SERVER_PORT:9100}
+
+#-----------------------------------------
+spring:
+  profiles:
+    active: ${SPRING_PROFILE}
+  application:
+    name: ${CONFIG_SERVER_NAME:config-server}
+  config:
+    import: optional:file:.env[.properties]
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nk-the-crazy/common-config
+          default-label: main
+          clone-on-start: true
+      discovery:
+        enabled: true
+#-----------------------------------------
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
+  instance:
+    hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
+    prefer-ip-address: false
+
+#-----------------------------------------
+
+management:
+  endpoint:
+    health:
+      showDetails: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - info
+#-----------------------------------------
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cache: trace
+    io:
+      gnt:
+        bmt: info
+
+#-----------------------------------------
