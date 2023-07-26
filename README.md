@@ -71,3 +71,18 @@ Additionally, components like Zuul (Gateway + Loadbalancing), Ribbon (Load Balan
 (this will setup and start postgreSQL, RabbitMq and all microservices)
 
 ```docker-compose -p bmt up -d```
+
+### Supported links
+
+1. Service-discovery UI: 
+   http://localhost:9000/
+
+   2. Identity-service: 
+
+       a. Rest-API documentation:
+       http://localhost:8180/api-docs/
+    
+       b. Authenticate user:
+
+
+   ```curl -X POST  -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/identity/login```

@@ -19,9 +19,7 @@ spring:
         - id: ${IDENTITY_SERVICE_NAME}_AUTH
           uri: lb://${IDENTITY_SERVICE_NAME}
           predicates:
-            - Path=/api/identity/login/**
-          filters:
-            - name: JwtAuthenticationFilter
+            - Path=/api/identity/login
         - id: ${IDENTITY_SERVICE_NAME}_SECURE
           uri: lb://${IDENTITY_SERVICE_NAME}
           predicates:
@@ -56,7 +54,7 @@ eureka:
       defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
   instance:
     hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
-    prefer-ip-address: false
+    prefer-ip-address: true
 
 #-----------------------------------------
 management:

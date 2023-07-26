@@ -20,7 +20,6 @@ public class CustomerController extends BaseController {
 
 
     @Operation(summary = "Get all customers")
-    @GetMapping("/")
     public ResponseEntity<List<Customer>> getCustomers() {
         try {
             return new ResponseEntity<>(customerService.getCustomers(), HttpStatus.OK);

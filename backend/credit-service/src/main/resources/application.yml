@@ -42,7 +42,7 @@ eureka:
       defaultZone: http://${SERVICE_DISCOVERY_HOSTNAME}:${SERVICE_DISCOVERY_PORT}/eureka/
   instance:
     hostname: ${SERVICE_DISCOVERY_HOSTNAME:localhost}
-    prefer-ip-address: false
+    prefer-ip-address: true
 
 
 #-----------------------------------------
