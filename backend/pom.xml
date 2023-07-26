@@ -22,7 +22,7 @@
         <spring-boot.version>3.0.5</spring-boot.version>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
         <spring-cloud-dependencies.version>2022.0.3</spring-cloud-dependencies.version>
-        <springdoc-openapi-ui.version>1.6.15</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>2.1.0</springdoc-openapi-ui.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
         <spring.kafka.version>2.9.7</spring.kafka.version>
         <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>

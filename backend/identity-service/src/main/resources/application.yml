@@ -64,13 +64,15 @@ management:
           - info
 #-----------------------------------------
 
-springdoc:
-  api-docs:
-    path: /api-docs-raw
-  swagger-ui:
-    Path: "/api-docs"
-    use-root-path: false
-  show-actuator: false
+#springdoc:
+#  api-docs:
+#    path=/api-docs:
+#    path: /api-docs-raw
+#  swagger-ui:
+#    Path: "/api-docs"
+#    use-root-path: false
+#  show-actuator: false
+
 
 #-----------------------------------------
 

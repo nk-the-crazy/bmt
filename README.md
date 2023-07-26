@@ -77,12 +77,23 @@ Additionally, components like Zuul (Gateway + Loadbalancing), Ribbon (Load Balan
 1. Service-discovery UI: 
    http://localhost:9000/
 
-   2. Identity-service: 
+2. Identity-service: 
 
-       a. Rest-API documentation:
-       http://localhost:8180/api-docs/
+    a. Rest-API documentation:
+    http://localhost:8180/swagger-ui/index.html
     
-       b. Authenticate user:
+    b. Authenticate user:
 
 
    ```curl -X POST  -H 'Content-Type: application/json' --data '{"username":"admin","password":"admin"}' http://localhost:8080/api/identity/login```
+
+3. Customer-service:
+
+   a. Rest-API documentation:
+   http://localhost:8184/swagger-ui/index.html
+
+4. Credit-service:
+
+   a. Rest-API documentation:
+   http://localhost:8183/swagger-ui/index.html
+
