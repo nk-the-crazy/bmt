@@ -61,3 +61,13 @@ Especially, when CQRS pattern is used by specific separate microservices, optimi
 Additionally, components like Zuul (Gateway + Loadbalancing), Ribbon (Load Balancing) and Resilience4J (Circuit Breaker) can be used to add extra performance optimizations.
 
 ### Deployment
+
+***1.Build project***
+
+```mvn clean install```
+
+
+***2.Deploy with docker-compose***
+(this will setup and start postgreSQL, RabbitMq and all microservices)
+
+```docker-compose -p bmt up -d```

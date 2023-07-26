@@ -2,8 +2,6 @@ version: "3.8"
 
 networks:
  default:
- rabbitmq_net:
-   driver: bridge
 
 services:
 
@@ -29,6 +27,89 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-    networks:
-      - rabbitmq_net
+
+#   Microservices
+
+  service-discovery:
+    build:
+      context: ../backend/service-discovery/
+      dockerfile:  ./Dockerfile
+    container_name: service-discovery
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 9000:9000
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  api-gateway:
+    build:
+      context: ../backend/api-gateway/
+      dockerfile:  ./Dockerfile
+    container_name: api-gateway
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 8080:8080
+    depends_on:
+      - service-discovery
+
+  identity-service:
+    build:
+      context: ../backend/identity-service/
+      dockerfile:  ./Dockerfile
+    container_name: identity-service
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 8180:8180
+    depends_on:
+      - service-discovery
+      - api-gateway
+
+  credit-service:
+    build:
+      context: ../backend/credit-service/
+      dockerfile:  ./Dockerfile
+    container_name: credit-service
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 8183:8183
+    depends_on:
+      - service-discovery
+      - api-gateway
+
+  customer-service:
+    build:
+      context: ../backend/customer-service/
+      dockerfile:  ./Dockerfile
+    container_name: customer-service
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 8184:8184
+    depends_on:
+      - service-discovery
+      - api-gateway
+
+  messaging-service:
+    build:
+      context: ../backend/messaging-service/
+      dockerfile:  ./Dockerfile
+    container_name: messaging-service
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 8182:8182
+    depends_on:
+      - service-discovery
+      - api-gateway
 
