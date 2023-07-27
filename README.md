@@ -42,6 +42,12 @@ Support of several legacy protocols (MQTT, STOMP, AMQP)
 (that facilitate integration and communication between different systems).
 Wide range of plugins support
 
+   Recently, I did research on alternatives and enhancements for microservice communication. 
+And has concluded that infrastructure can be enhanced by leveraging **Service-Mesh** patterns.
+They can be used as a complementary to an existing components (Spring Cloud). 
+Service-mesh platforms  **Istio**, **"Linkerd"** seem to be better option that best integrate with Spring Environment. 
+
+
 ### 4. API Security
 REST-API endpoints are secured by API-Gateway. API-Gateway intercepts (gateway filter) all HTTP requests and based on Authorization header forwards requests either to Identity or other microservices. Identity-Service authorizes requests and generates access tokens.
 
