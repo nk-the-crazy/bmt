@@ -23,12 +23,11 @@ Technical stack information :
 
 ### 2. Spring Cloud Environment
 
-| No | Component  | Details |
-|----|------------|----|
-| 1  | service-discovery| Used as service discovery and load-balancing|
-| 2  | config-server|    |
-| 3  | Spring Boot |    |
-| 4  | api-gateway| Security handler for Rest-API|
+| No | Component  | Details                                                   |
+|----|------------|-----------------------------------------------------------|
+| 1  | service-discovery| Used as service discovery and load-balancing              |
+| 2  | config-server| Externilize configuration                                 |
+| 3  | api-gateway| Rest-API security, Load Balancing, API Traffic Management |
 
 ### 3. Microservice Intercommunication
 
