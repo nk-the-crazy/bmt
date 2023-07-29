@@ -19,33 +19,34 @@ Technical stack information :
 | 3  | Spring Boot | 3.x.x   |  Spring Framework v6, Spring Cloud v2022.x|
 | 4  | RabbitMQ    | 3.8     |         |
 
-###
+
 
 ### 2. Spring Cloud Environment
 
 | No | Component  | Details                                                   |
 |----|------------|-----------------------------------------------------------|
 | 1  | service-discovery| Used as service discovery and load-balancing              |
-| 2  | config-server| Externilize configuration                                 |
+| 2  | config-server| Externalize configuration                                 |
 | 3  | api-gateway| Rest-API security, Load Balancing, API Traffic Management |
 
 ### 3. Microservice Intercommunication
 
   Microservice intercommunication is handled by RabbitMQ.
 Considering specific requirements of the Banking System, the choice was made to RabbitMQ over Kafka.
-Main features of RabbitMQ:
 
-Flexible/Extended/Advanced message routing (RabbitMQ supports 4 methods of message routing, whereas Kafka only has a pub/sub model).
-Support for message priorities
-Reliable message delivery
-Support of several legacy protocols (MQTT, STOMP, AMQP)
+***Main features of RabbitMQ:***
+
+- Flexible/Extended/Advanced message routing (RabbitMQ supports 4 methods of message routing, whereas Kafka only has a pub/sub model).
+- Support for message priorities
+- Reliable message delivery
+- Support of several legacy protocols (MQTT, STOMP, AMQP)
 (that facilitate integration and communication between different systems).
-Wide range of plugins support
+- Wide range of plugins support
 
-   Recently, I did research on alternatives and enhancements for microservice communication. 
+   Recently, I did research on alternatives and enhancements for microservice communication.
 And has concluded that infrastructure can be enhanced by leveraging **Service-Mesh** patterns.
-They can be used as a complementary to an existing components (Spring Cloud). 
-Service-mesh platforms  **Istio**, **"Linkerd"** seem to be better option that best integrate with Spring Environment. 
+They can be used as a complementary to an existing components (Spring Cloud).
+Service-mesh platforms  **Istio**, **"Linkerd"** seem to be better option that best integrate with Spring Environment.
 
 
 ### 4. API Security
@@ -61,7 +62,7 @@ in microservices systems. I found the SAGA pattern and XA transaction approaches
 
 ### Performance
 
-To improve performance and security, CQRS (Command Query Responsibility Segregation) pattern can be implemented by separating Read and Write database operations.  
+To improve performance and security, CQRS (Command Query Responsibility Segregation) pattern can be implemented by separating Read and Write database operations.
 Especially, when CQRS pattern is used by specific separate microservices, optimizing connection performance and scalability. Complex read logic can be scaled independently from write logic.
 Additionally, components like Zuul (Gateway + Loadbalancing), Ribbon (Load Balancing) and Resilience4J (Circuit Breaker) can be used to add extra performance optimizations.
 
@@ -79,14 +80,14 @@ Additionally, components like Zuul (Gateway + Loadbalancing), Ribbon (Load Balan
 
 ### Supported links
 
-1. Service-discovery UI: 
+1. Service-discovery UI:
    http://localhost:9000/
 
-2. Identity-service: 
+2. Identity-service:
 
     a. Rest-API documentation:
     http://localhost:8180/swagger-ui/index.html
-    
+
     b. Authenticate user:
 
 
